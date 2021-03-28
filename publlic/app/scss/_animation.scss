@@ -1,0 +1,102 @@
+@keyframes fade-in {
+    from {
+        visibility: hidden;
+        opacity: 0;
+        background: none;
+        display: none;
+    }
+    1% {
+        visibility: visible;
+        opacity: 0;
+        background: white;
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        background: white;
+    }
+}
+
+
+.fade-in {
+    animation: fade-in 300ms ease-in-out;
+}
+
+@keyframes fade-out {
+    from {
+        visibility: visible;
+        opacity: 1;
+        background: white;
+    }
+    99% {
+        visibility: visible;
+        opacity: 0;
+        background: white;
+    }
+    to {
+        visibility: hidden;
+        opacity: 0;
+        background: none;
+    }
+}
+
+.fade-out {
+    animation: fade-out 300ms ease-in-out;
+}
+
+@keyframes body-out {
+    from {
+        background-image: none;
+    }
+    to {
+        background: #000000;
+    }
+}
+
+.body-out {
+    animation: body-out 300ms ease-in-out;
+}
+
+@keyframes mobile-in {
+    from {
+        visibility: hidden;
+        opacity: 0;
+        background: none;
+    }
+    1% {
+        visibility: visible;
+        opacity: 0;
+        background: #000000;
+    }
+    to {
+        visibility: visible;
+        opacity: 1;
+        background: #000000;
+    }
+}
+
+.mobile-in {
+    animation: mobile-in 300ms ease-in-out;
+}
+
+@keyframes mobile-out {
+    from {
+        visibility: visible;
+        opacity: 1;
+        background: #000000;
+    }
+    99% {
+        visibility: visible;
+        opacity: 0;
+        background: #000000;
+    }
+    to {
+        visibility: hidden;
+        opacity: 0;
+        background: none;
+    }
+}
+
+.mobile-out {
+    animation: mobile-out 300ms ease-in-out;
+}

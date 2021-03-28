@@ -1,0 +1,115 @@
+.menu__links {
+    .none {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.nav__search {
+    .white {
+        display: none;
+        visibility: hidden;
+        opacity: 0; 
+    }
+}
+
+body {
+    &.mode {
+        background-image: url('/images/GettyImages-1066472014-7f0a7babac50423ab826eaca772d3064.jpg');
+.footer {
+    .top {
+        &__logo {
+            p {
+                color: #ffffff;
+            }
+        }
+    }
+}
+        .menu__links {
+            color: #ffffff;
+            .none {
+                display: block;
+                visibility: visible;
+                opacity: 1;
+            }
+            .on {
+                display: none;
+                visibility: hidden;
+                opacity: 0; 
+            }
+        }
+
+
+        .menu {
+            background: #666666;
+            h2 {
+                color: #ffffff;
+            }
+            .dark {
+                color: #ffffff;
+            }
+            .dark:hover {
+                color: #000000;
+            }
+        }
+
+        #hamburger {
+            > span {
+                background-color: #000000;
+            }
+        }
+
+        .nav {
+            background: #0000001a;
+            &__links {
+                .null {
+                    color: #000000;
+                }
+                .null:hover {
+                    color: #f44336;
+                    font-weight: 700;
+                  }
+            }
+        }
+        .top__logo {
+            p {
+                color: #000000;
+            }
+        }
+        
+        .nav__search {
+            .white {
+                display: block;
+                visibility: visible;
+                opacity: 1; 
+            }
+            .black {
+                display: none;
+                visibility: hidden;
+                opacity: 0; 
+            }
+        }
+    }
+}
+
+.body {
+    &.done {
+        .body__search {
+            background: #666666;
+            form {
+                background: #ffffff;
+            }
+            .movies {
+                color: #ffffff;
+                &__texts {
+                    .genre {
+                         p {
+                             color: #000000;
+                         }
+                    }
+                }
+            }
+        }
+    }
+}

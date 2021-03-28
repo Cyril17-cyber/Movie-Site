@@ -1,0 +1,92 @@
+.body {
+    &.search {
+        .body__search {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        // flex: 1 0 15%;
+        width: 100vw !important;
+        visibility: visible;
+        opacity: 1;
+        background: #ffffff;
+        }
+    }
+    &__search {
+        @media (max-width: 993px) {
+            width: 100vw !important;
+        }
+        height: 140rem;
+        visibility: hidden;
+        opacity: 0;
+        background: none;
+        display: none;
+        // width: 22rem;
+        border-left: 3.5px solid #f44336;
+        border-radius: 15px 0px 0px 15px;
+        width: 0px;
+        padding: 8px 10px;
+        h4 {
+            color: black;
+        }
+        form {
+            width: 20rem;
+            display: flex;
+            padding: 5px 0px 5px 19px;
+            background: #0000004a;
+            border-radius: 28px;
+            align-items: center;
+            justify-content: flex-start;
+            .bar {
+                background: none;
+                border: none;
+                outline: none;
+                transition: all 300ms ease-in-out;
+            }
+            .bar:focus {
+                font-size: 18px;
+            }
+        }
+        .image {
+            width: 9rem;
+            img {
+                width: 100%
+            }
+        }
+        .movies {
+            margin: 7px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            text-decoration: none;
+            transition: all 300ms ease-in-out;
+            &__texts {
+                margin-left: 9px;
+                width: 145px;
+                p {
+                    margin: 5px 0px 4px 0px;
+                    font-weight: 700;
+                }
+                .genre {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    p {
+                        margin: 8px 0px;
+                        color: #656565;
+                    }
+                    .rated {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+        .movies:hover {
+            color: #f44336;
+        }
+    }
+}
