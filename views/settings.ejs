@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon (1).ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="<%=css%>">
+    <title><%= title %></title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="top">
+            <a href="#" class="top__menu" id="menu">
+                <img src="images/icon-close.svg" alt="" srcset="" class="ellipsis">
+                <img src="images/ellipsis-v-solid (1) 1.svg" alt="" srcset="" class="shut">
+            </a>
+            <div class="top__logo">
+                <img src="images/poker.jpg" alt="" srcset="">
+                    <p>Kyrillo</p>
+        </div>
+        </div>
+
+        <!-- Desktop navigation bar -->
+        <div class="nav__links">
+            <a href="/home" class="null">All</a>
+        <a href="/home/action" class="null">Action</a>
+        <a href="/home/horror" class="null">Horror</a>
+        <a href="/home/drama" class="null">Drama</a>
+        <a href="/home/animation" class="null">Animation</a>
+            
+        </div>
+        
+        <!-- User Information -->
+        <% userId.forEach(image => { %>
+            <a href="/settings" class="id">
+                <img src="data:image/<%=image.img.contentType%>;base64,
+					<%=image.img.data.toString('base64')%>">
+        </a>
+       <% }); %>
+
+        <div class="mid">
+
+    
+            <!-- hamburger button -->
+            <a href="#" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+        </div>
+    </nav>
+
+    <!-- Mobile navigation -->
+    <div class="mobile__menu">
+        <a href="/home" class="null">All</a>
+        <a href="/home/action" class="null">Action</a>
+        <a href="/home/horror" class="null">Horror</a>
+        <a href="/home/drama" class="null">Drama</a>
+        <a href="/home/animation" class="null">Animation</a>
+        
+    </div>
+
+    <div class="body visible">
+        <!-- Main Menu  -->
+
+        <div class="menu">
+            <h2>MENU</h2>
+
+            <a href="#" class="menu__links  dark" id="dark">
+                <div class="img">
+                    <img src="images/Vector.svg" alt="" srcset="" class="on" style="width: 19px;">
+                    <img src="images/toggle_off_black_24dp.svg" alt="" srcset="" class="none">
+                </div>
+            <p class="text">Dark Mode</p>
+            </a>
+             
+                <a href="/home" class="menu__links  now">
+                    <div class="img">
+                        <i class="fas fa-home"></i>
+                    </div>
+                <p class="text">Home</p>
+                </a>
+              
+
+                <h4>General</h4>
+                <a href="/settings" class="menu__links" id="active">
+                    <div class="img">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                <p class="text">Settings</p>
+                </a>
+
+                <a href="/about" class="menu__links">
+                    <div class="img">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                <p class="text">About</p>
+                </a>
+
+                <a href="#" class="menu__links" id="logout">
+                    <div class="img">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                <p class="text">Log Out</p>
+                </a>
+        </div>
+
+        <div class="logout">
+            <h1>Logout</h1>
+            <p>Are you sure you want to logout?</p>
+            <div class="logout__links">
+                <a href="#" id="cancel">Cancel</a>
+                <a href="/login">Ok</a>
+            </div>
+        </div>
+
+<% userId.forEach(image => { %>
+        <div class="body__home" style="
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        flex-direction: column;
+        align-items: center;
+        background: #ffffff;
+        color: #000000;
+    ">
+                <img src="data:image/<%=image.img.contentType%>;base64,
+            <%=image.img.data.toString('base64')%>" style="
+            height: 24rem;
+            border-radius: 50%;
+        ">
+            <div style="
+            margin: 5px 0px 0px 0px;
+            font-size: 35px;
+        "><%=image.name%></div>
+            <div style="
+            margin: 5px 0px 0px 0px;
+            display: flex;
+            align-items: center;
+        ">
+        <p style="font-size: 30px;"><%=image.username%></p>
+        <a href="/update/username" class="settings__links">Change Username</a>    
+    </div>
+            <div style="
+            display: flex;
+            align-items: center;
+            margin: 5px 0px 12px;
+        ">
+        <p style="font-size: 25px;"><%=image.email%></p>
+        <a href="/update/email" class="settings__links">Change Email</a>    
+    </div>
+
+        </div>
+        </div>
+<% }); %>
+
+        <%- include('partials/footer') -%>

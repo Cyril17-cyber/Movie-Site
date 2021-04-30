@@ -1,0 +1,39 @@
+<%- include('partials/subHeader') -%>
+
+
+<% const length = 3; %>
+<% const content = items.name; %>
+<% const truncatedContent = content.substring(0, length)%>
+
+
+<div class="<%=truncatedContent%>">
+    <div class="Fas__main">
+        <div class="main">
+            <h1><%= items.name %></h1>
+            <h4><%= items.category %> | <%= items.type %></h4>
+            <h4><%= items.rating %> | <%= items.snvl %></h4>
+
+            <div class="main__links">
+                <a href="<%=items.trailer%>" class="watch">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Watch Trailer</p>
+                </a>
+                <a href="<%= items.download%>" class="download">
+                    <i class="fas fa-download"></i>
+                    <p>Download</p>
+                </a>
+            </div>
+            <p class="describe">
+                <%= items.description %>
+            </p>
+        </div>
+        <div class="empty"></div>
+    </div>
+
+</div>
+
+
+    <%- include('partials/movieS') -%>
+    <%- include('partials/subFooter') -%>
+
+    

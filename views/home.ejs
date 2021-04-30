@@ -1,0 +1,33 @@
+<%- include('partials/header') -%>
+
+
+<div class="body__home">
+
+    <!--No search results-->
+   <% if(items.length === 0) { %>
+        <div class="errMessage">
+            <h1>😓 Your Search didn't match any of our movies.</h1>
+        <ul>
+            <li>Check your spellings</li>
+            <li>You can only search by name.</li>
+        </ul>
+        </div>
+   <% } else { %>
+
+    <!--Movies and search results-->
+        <% items.forEach(image => { %>
+            <a href="/<%=image.category%>/movie/<%=image.name%>" class="home__movie">
+                <div class="movie__img">
+                    <img src="data:image/<%=image.img.contentType%>;base64,
+                        <%=image.img.data.toString('base64')%>" alt="" srcset="">
+                </div>
+            </a>
+       <% }); %>
+   <% } %>
+
+
+</div>
+    <%- include('partials/search') -%>
+    <%- include('partials/footer') -%>
+
+    

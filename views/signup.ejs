@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon (1).ico" type="image/x-icon">
+    <link rel="stylesheet" href="app/scss/signup.css">
+    <title>Sign-Up</title>
+</head>
+<body>
+    <div class="card">
+        <form action="/register" method="POST" enctype="multipart/form-data">
+            <div class="top__logo">
+                <img src="images/poker.jpg" alt="" srcset="">
+                <p>Kyrillo</p>
+            </div>
+            <div class="head">
+                <img src="images/account_circle_black_24dp.svg" alt="" srcset="">
+                <h1 class="h3 mb-3 fw-normal"><%=message%></h1>
+            </div>
+            <div class="dp">
+              <label for="file">Profile Image</label>
+              <input type="file" id="image"
+					name="image" value="" required>
+            </div>
+              <input type="text" class="name" name="name" placeholder="name" required autofocus>
+              <input type="text" class="name" name="userName" placeholder="Username" required>
+              <input type="email" name="email" class="email" placeholder="Your Email" required>
+              <input type="Password" name="password" class="password" placeholder="Password" required>
+              <input type="Password" name="passwordConfirmation" class="repeat" placeholder="Confirm Password" required>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" class= "check" value="remember-me" required> I agree to all <a href="/t&c" class="termsAndConditions">Terms and conditions</a>
+                </label>
+              </div>
+              <button class="btn" type="submit">SIGN UP.</button>
+            <p class="rights">Already have an account? <a href="/login">Login here.</a></p>
+          </form>
+    </div>
+</body>
+</html>

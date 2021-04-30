@@ -1,0 +1,20 @@
+<%- include('partials/subHeader') -%>
+
+
+<div class="body__home">
+
+    <!--Movies-->
+    <% items.forEach(image => { %>
+        <a href="/<%=image.category%>/movie/<%=image.name%>" class="home__movie">
+            <div class="movie__img">
+                <img src="data:image/<%=image.img.contentType%>;base64,
+					<%=image.img.data.toString('base64')%>" alt="" srcset="">
+            </div>
+        </a>
+   <% }); %>
+
+</div>
+<%- include('partials/movieS') -%>
+<%- include('partials/subFooter') -%>
+
+    
