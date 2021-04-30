@@ -22,7 +22,6 @@ let userId = [];
 
 
 const mongoUrl = process.env.MONGOURL;
-const port = 3000;
 
 mongoose.connect(mongoUrl,
     { useNewUrlParser: true, useUnifiedTopology: true }, err => {
@@ -323,7 +322,9 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
-app.listen(port, err => {
+let port = process.env.PORT;
+
+app.listen(port || 3000, err => {
     if (err)
         throw err
     console.log('Server listening on port ' + port)
