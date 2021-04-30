@@ -1,7 +1,10 @@
 {
   "name": "movie-streamer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movie streaming site project",
+  "engines": {
+    "node": "14.15.5"
+  },
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

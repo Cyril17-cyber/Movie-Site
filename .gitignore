@@ -1,4 +1,14 @@
-/node_modules
-*.scss
-*/.env
+# Node build artifacts
+node_modules
+npm-debug.log
+
+# Local development
+*.env
+*.dev
+.DS_Store
 *.txt
+*.scss
+
+# Docker
+Dockerfile
+docker-compose.yml
