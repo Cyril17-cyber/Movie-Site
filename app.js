@@ -8,6 +8,8 @@ const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -56,12 +58,7 @@ mongoose.connect(mongoUrl,
     name: String,
     username: String,
     email: String,
-    password: String,
-    img:
-    {
-        data: Buffer,
-        contentType: String
-    }
+    password: String
 });
 
 const user = new mongoose.model('User', userSchema);
@@ -82,7 +79,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.get("/", function(req,res){
-    userId = [];
+    userId.length = 0;
     res.sendFile(__dirname + "/landing.html");
 });
 
@@ -92,47 +89,38 @@ app.get('/t&c', function(req, res){
 
 app.route("/register")
 .get(function(req, res){
-    userId = [];
+    userId.length = 0;
     res.render('signup', {message: "Create Account"});
 })
 .post(upload.single('image'), (req, res, next) => {
 
-    const name = _.upperFirst(req.body.name);
-    const username = _.upperFirst(req.body.userName);
+    const Firstname = _.upperFirst(req.body.firstname);
+    const Lastname = _.upperFirst(req.body.lastname);
+    const name = Firstname + " " + Lastname;
     const email = _.lowerFirst(req.body.email);
     const password = req.body.password;
     const passwordConfirmation = req.body.passwordConfirmation;
  
-        var obj = {
-            name: name,
-            username: username,
-            email: email,
-            password: password,
-            img: {
-                data: fs.readFileSync(path.join(__dirname + '/images/' + req.file.filename)),
-                contentType: 'image/png'
-            }
-        }
-        user.create(obj, (err, item) => {
-            if (err) {
-                res.render('signup', {message: "Try again!"});
-            }
-            else {
-                if(password === passwordConfirmation){
-                    item.save();
-                    res.redirect('/login');
-                } else {
-                    res.send('There was an error creating your account. Please try again');
-                }
-            }
-        }); 
-
+        bcrypt.hash(password, saltRounds, function(err, hash){
+            const person = new user ({
+                name: name,
+                username: Firstname,
+                email: email,
+                password: hash
+            });
+                    if(password === passwordConfirmation){
+                        person.save();
+                        res.redirect('/login');
+                    } else {
+                        res.render('signup', {message: "An error Occured. Please try again"});
+                    }
+        });
 
 });
 
 app.route('/login')
 .get(function(req, res){
-    userId = [];
+    userId.length = 0;
     res.render('signin', {message: "Login"});
 })
 .post(function(req, res){
@@ -141,15 +129,17 @@ app.route('/login')
 
     user.findOne({ email: email }, (err, items) => {
         if (!items) {
-            res.render('signin', {message: "Try again!"});
+            res.render('signin', {message: "Your record does not exist. please signup or put in the email you used while registering"});
         }
         else {
-                if(items.password === password){
-                    userId.push(items);
-                    res.redirect('/home');
-                } else {
-                    res.render('signin', {message: "Try again!"});
-                }
+                bcrypt.compare(password, items.password, function(err, response){
+                        if(response === true){
+                            userId.push(email);
+                            res.redirect('/home');
+                        } else {
+                            res.render('signin', {message: "Incorrect password. Please try again"});
+                        }
+                });
         }
     });
 });
@@ -168,7 +158,7 @@ app.get('/home', function(req, res){
                     res.status(500).send('An error occurred', err);
                 }
                 else {
-                    res.render('home', { items: items, title: 'All', userId: userId, css: categoriesCss});
+                    res.render('home', { items: items, title: 'All', css: categoriesCss});
                 }
             });
         } else {
@@ -198,7 +188,7 @@ app.get('/home/:category', function(req, res){
                 res.status(500).send('An error occurred', err);
             }
             else {
-                res.render('categories', { items: items, title: upperCase, userId: userId, css: "/app/scss/home.css"});
+                res.render('categories', { items: items, title: upperCase, css: "/app/scss/home.css"});
             }
         });
     }
@@ -215,89 +205,10 @@ app.get('/:category/movie/:moviename', function(req, res){
                 res.status(500).send('An error occurred', err);
             }
             else {
-                res.render('movies', { items: items, userId: userId, css: movieCss});
+                res.render('movies', { items: items, css: movieCss});
             }
         });
     }
-});
-
-app.get('/settings', function(req, res){
-    if(userId.length === 0){
-        res.redirect('/login');
-    } else {
-        res.render('settings', { title: 'Settings', userId: userId, css: categoriesCss});
-    }
-});
-
-app.route('/update/email')
-.get(function(req, res){
-    if(userId.length === 0){
-        res.redirect('/login');
-    } else {
-        res.render('update', {title: 'email', message: 'Update Email'});
-    }
-})
-.post(function(req, res){
-    const email = _.lowerFirst(req.body.email);
-    const password = req.body.password;
-    userId.forEach(element => {
-        const name = element.name
-        user.findOne({ name: name }, function(err, items){
-        console.log(items);
-        bcrypt.compare(password, items.password, function(error, result){
-            if(result === true){
-                userId = [];
-                const oldEmail = items.email;
-                user.updateOne({ email: oldEmail}, {email: email}, function(failed){
-                    if(!failed){
-                        user.findOne({ email: email }, function(none, foundItems){
-                            userId.push(foundItems);
-                            res.redirect('/settings');
-                        });
-                    }
-                });
-            } else {
-                res.render('update', {message: "Try again!", title: 'email'});
-            };
-        });
-    });
-    }); 
-});
-
-
-app.route('/update/username')
-.get(function(req, res){
-    if(userId.length === 0){
-        res.redirect('/login');
-    } else {
-        res.render('update', {title: 'username', message: 'Update Username!'});
-    }
-})
-.post(function(req, res){
-    const username = _.upperFirst(req.body.username);
-    const password = req.body.password;
-
-    userId.forEach(element => {
-        const name = element.name;
-        user.findOne({ name: name }, function(err, items){
-            bcrypt.compare(password, items.password, function(error, result){
-                if(result === true){
-                    userId = [];
-                    const oldusername = items.username;
-                    user.updateOne({ username: oldusername}, {username: username}, function(failed){
-                        if(!failed){
-                            user.findOne({ username: username }, function(none, foundItems){
-                                userId.push(foundItems);
-                                res.redirect('/settings');
-                            });
-                        }
-                    });
-                } else {
-                    res.render('update', {message: "Try again!", title: 'username',});
-                };
-            });
-        });
-    });
 });
 
 

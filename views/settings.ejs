@@ -128,7 +128,7 @@
     ">
                 <img src="data:image/<%=image.img.contentType%>;base64,
             <%=image.img.data.toString('base64')%>" style="
-            height: 24rem;
+            width: 50%;
             border-radius: 50%;
         ">
             <div style="
@@ -147,6 +147,7 @@
             display: flex;
             align-items: center;
             margin: 5px 0px 12px;
+            wudth: 50vw;
         ">
         <p style="font-size: 25px;"><%=image.email%></p>
         <a href="/update/email" class="settings__links">Change Email</a>    

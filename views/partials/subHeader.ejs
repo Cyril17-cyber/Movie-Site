@@ -10,9 +10,7 @@
     <title><%= items.name %></title>
 </head>
 <body>
-    
 
-<script src="/app/js/script.js"></script>
     <nav class="nav">
         <div class="top">
             <a href="#" class="top__menu" id="menu">
@@ -37,15 +35,6 @@
             
         </div>
         
-        <!-- User Information -->
-        <% userId.forEach(image => { %>
-            <a href="/settings" class="id">
-                <img src="data:image/<%=image.img.contentType%>;base64,
-					<%=image.img.data.toString('base64')%>">
-        </a>
-       <% }); %>
-
-
 
         <div class="mid">
 
@@ -96,12 +85,6 @@
               
 
                 <h4>General</h4>
-                <a href="/settings" class="menu__links">
-                    <div class="img">
-                        <i class="fas fa-user-cog"></i>
-                    </div>
-                <p class="text">Settings</p>
-                </a>
 
                 <a href="/about" class="menu__links">
                     <div class="img">
