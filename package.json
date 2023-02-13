@@ -7,6 +7,8 @@
   },
   "main": "app.js",
   "scripts": {
+    "build": "npm run build",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
